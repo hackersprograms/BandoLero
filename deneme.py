@@ -1,5 +1,5 @@
 import requests
-url = "http://postb.in/0tLKmdJc"
+url = "http://wowturkey.com/"
 requests.get(url)
 type(requests.get(url))
 r = requests.get(url) (metodları görme)
