@@ -1,11 +1,17 @@
-import requests
-url = "http://wowturkey.com/"
-requests.get(url)
-type(requests.get(url))
-r = requests.get(url) (metodları görme)
-r.status_code (doğru çalışıyomu diye kontrol etme)
-r.ok (true)
-r.url ( istek atılan url i görme)
-r = requests.post(url) ( post atma)
-r = requests.post(url,data={"username":"bandolero","password":"123"})
+from scapy.all import *
+
+gonder = (IP(dst="192.168.1.1")/TCP(sport=4444, dport=80, flags="FS"))
+send(gonder)
+yakala = sniff(iface="wlan1", count=5)
+yakala.nsummary()
+ptk0=yakala[0]
+ptk0.show()
+
+srloop(IP(dst="192.168.1.1")/ICMP(), count=100)
+
+yakala = sniff(filter="arp", count=100)
+yakala.nsummary()
+ptks0=yakala[0]
+ptks0.show()
+
 
