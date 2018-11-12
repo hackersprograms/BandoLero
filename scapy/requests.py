@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-r = requests.get("http://wowturkey.com/forum/index.php") ("linkteki kodları görmeye yarar")
+r = requests.get("http://wowturkey.com/") ("linkteki kodları görmeye yarar")
 r.content ("linkteki kodları ekrana bastırır")
 
 soup = BeautifulSoup(r.content)
