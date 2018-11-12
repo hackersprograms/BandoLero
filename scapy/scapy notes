@@ -1,0 +1,66 @@
+https://medium.com/three-arrows-security/scapy-nedir-ve-nasıl-kullanılır-e2b1a264898a
+
+SCAPY NOTES
+
+IP Başlığı Hk.
+
+Source IP: Kaynağın IP adresi
+
+Destination IP: Hedef IP adresi
+
+Flags: Paketin bozulmadan iletilebilmesi için gerekirse parçalanıp parçalanmayacağı hk. Bilgi veren kısımdır.
+
+Header Checksum: Karşıdaki makinenin paketi bozulmadan alıp almadığını kontrol etmesini sağlayan paketin bilgi kısmı.
+
+TTL(Time to Live): Gönderdiğimiz paketin loop’a(sonsuz döngü) girmemesi için ne kadar süre sonra yok olacağı hakkında bilgi veren kısımdır.
+
+
+ICMP Başlığı Hk.
+
+Type: Kontrol mesajının tipi
+
+Code: Kontrol mesajı tipinin alt dalı, daha spesifik bilgi.
+
+DHCP: Dynamic Host Configuration Protocol. Ağda bulunan cihazlara IP, subnet mask, gateway gibi verilerin otomatik olarak atanmasını sağlayan protokoldür. IP çakışması vb durumları önlemek için çok önemlidir.
+
+Şimdi bu bilgilerimizi verdiğimize göre scapy kullanımına geçebiliriz. Öncelikle temel komutlarımızla başlayalım.
+
+Help(): Scapy hakkında yardım almanızı sağlayan komuttur. Parantez içine yardım almak istediğiniz şeyi yazabilir yada boş bırakarak fonksiyonu çalıştırıp komut satırına yardım almak istediğiniz konuyu yazabilirsiniz. Girip çıkamayan olursa diye çıkmak için “q”ya basınız.
+
+ICMP Paketi:
+
+Ip başlığı ve ıcmp başlığı oluşturmamız gerekiyor. Aşağıdaki kodları sırayla takip edin.
+
+ip_basligi=IP(dst=”Hedef ip”, src=”kaynak ip”, ttl=20)
+icmp_basligi=ICMP(type=8, code=0)
+icmp_paketi=ip_basligi/icmp_basligi
+send(icmp_paketi)
+
+DHCP Paketi:
+
+Ip, udp ve dhcp basliklarını kullanacağız.
+
+ip_basligi=IP(src=”0.0.0.0", dst=”255.255.255.255")
+udp_basligi=UDP(dport=67, sport=68)
+dhcp_basligi=DHCP(options=[(“lease_time”, 70000)])
+dhcp_paketi=ip_basligi/udp_basligi/dhcp_basligi
+send(dhcp_paketi)
+
+DNS Paketi:
+
+IP, UDP ve DNS kullanacağız.
+
+ip_basligi=IP(dest=”8.8.8.8")
+udp_basligi=UDP(dport=53)
+dns_basligi=DNS(rd=1, qd=DNSQR(qname=”www.threearrowsec.com"))
+dns_paketi=ip_basligi/udp_basligi/dns_basligi
+send(dns_paketi)
+
+TCP Paketi:
+
+tcp_basligi=TCP(sport=8080, dport=22, flags=”S”)
+ip_basligi=IP(src=”127.0.0.1",dst=”127.0.0.1")
+tcp_paketi=ip_basligi/tcp_basligi
+send(tcp_paketi)
+
+
