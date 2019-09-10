@@ -1,0 +1,238 @@
+from tkinter import *
+#import pyautogui
+#import playsound
+import os
+
+pencere = Tk()
+pencere.title("My Program")
+pencere.geometry("700x400")
+pencere.resizable(FALSE,FALSE)
+
+renk = Label(pencere, bg="black", width="100", height="30")
+renk.grid(row=0, column=0)
+
+quser="bandolero"
+qpasswd="bandolero"
+
+def home():
+    user = user2.get()  
+    passwd = passwd2.get()
+    if (user == quser and passwd == qpasswd):
+        sonuc.config(text="Doğru !")
+
+        renk = Label(pencere, bg="black", width="100", height="30")
+        renk.grid(row=0, column=0)
+        print("user  : " + str(user2.get()))
+        print("pass : " + str(passwd2.get()))
+        
+        file = open("site.html", "w")
+        file.write("""<html><script>document.location="http://bandoleromt2.somee.com";</script></html>""")
+
+        buton = Button(pencere, bg="black", fg="green", text="oto tuş", width="10", command=auto)
+        buton.place(x=10, y=10)
+
+        buton2 = Button(pencere, bg="black", fg="green", text="site", width="10", command=site)
+        buton2.place(x=10, y=40)
+
+        buton3 = Button(pencere, bg="black", fg="green", text="Müzik", width="10", command=müzik)
+        buton3.place(x=10, y=70)
+
+        buton4 = Button(pencere, bg="black", fg="green", text="Linux", width="10", command=linux)
+        buton4.place(x=10, y=100)
+       
+        menubar = Menu(pencere,bg="black", fg="white")
+        filemenu = Menu(menubar, bg="black", fg="white", tearoff = 0)
+        filemenu.add_command(label = "Yeni", command = menu)
+        filemenu.add_command(label = "Aç", command = menu)
+        filemenu.add_command(label = "Kaydet", command = menu)
+        filemenu.add_command(label = "Farklı Kaydet...", command = menu)
+        filemenu.add_command(label = "Kapat", command = menu)
+        # filemenu.add_separator() menüde çizgi çekmeye yarar
+        filemenu.add_separator()
+
+        filemenu.add_command(label = "Çıkış", command = pencere.quit)
+        menubar.add_cascade(label  = "Dosya", menu = filemenu)
+        editmenu = Menu(menubar, bg="black", fg="white", tearoff=0)
+        editmenu.add_command(label = "Geri Al", command = menu)
+
+        editmenu.add_command(label = "Kes", command = menu)
+        editmenu.add_command(label = "Kopyala", command = menu)
+        editmenu.add_command(label = "Yapıştır", command = menu)
+        editmenu.add_command(label = "Sil", command = menu)
+        editmenu.add_command(label = "Hepsini Seç", command = menu)
+
+        menubar.add_cascade(label  = "Düzenle", menu = editmenu)
+        helpmenu = Menu(menubar, bg="black", fg="white", tearoff=0)
+        helpmenu.add_command(label = "Yardım Sayfası", command = menu)
+        helpmenu.add_command(label = "Hakkımda...", command = menu)
+        menubar.add_cascade(label  = "Yardım", menu = helpmenu)
+        pencere.config(menu = menubar)
+
+        
+        
+    elif (user != quser and passwd == qpasswd):
+        sonuc.config(text="İsim yanlış !")
+        print("user  : " + str(user2.get()))
+        print("pass : " + str(passwd2.get()))
+    elif (user == quser and passwd != qpasswd):
+        sonuc.config(text="Şifre yanlış !")
+        print("user  : " + str(user2.get()))
+        print("pass : " + str(passwd2.get()))
+    else:
+        sonuc.config(text="Giriş Başarısız !")
+        print("user  : " + str(user2.get()))
+        print("pass : " + str(passwd2.get()))
+
+def auto():
+    renk = Label(pencere, bg="black", width="100", height="30")
+    renk.grid(row=0, column=0)  
+    
+    geridön = Button(pencere, bg="black", fg="green", text="Geri dön", command=home)
+    geridön.place(x=10, y=10)
+    
+    klavye1 = Button(pencere, bg="black", fg="green", text="1", command=tuş1)
+    klavye1.place(x=10, y=40)
+
+    klavye2 = Button(pencere, bg="black", fg="green", text="2", command=tuş2)
+    klavye2.place(x=30, y=40)
+
+    klavye3 = Button(pencere, bg="black", fg="green", text="3", command=tuş3)
+    klavye3.place(x=50, y=40)
+
+    klavye4 = Button(pencere, bg="black", fg="green", text="4", command=tuş4)
+    klavye4.place(x=70, y=40)
+
+    klavye4 = Button(pencere, bg="black", fg="green", text="w", command=tuşw)
+    klavye4.place(x=10, y=70)
+
+    klavye4 = Button(pencere, bg="black", fg="green", text="a", command=tuşa)
+    klavye4.place(x=30, y=70)
+
+    klavye4 = Button(pencere, bg="black", fg="green", text="s", command=tuşs)
+    klavye4.place(x=50, y=70)
+
+    klavye4 = Button(pencere, bg="black", fg="green", text="d", command=tuşd)
+    klavye4.place(x=70, y=70)
+
+    fare = Button(pencere, bg="black", fg="green", text="sol tık", command=solclick)
+    fare.place(x=100, y=40)
+
+    fare = Button(pencere, bg="black", fg="green", text="sağ tık", command=sağclick)
+    fare.place(x=150, y=40)
+
+def tuş1():
+    a=1
+    while (a <50):
+        a=a +1
+        pyautogui.typewrite("1", interval=0.05)
+
+def tuş2():
+    a=1
+    while (a <50):
+        a=a +1
+        pyautogui.typewrite("2", interval=0.05)
+
+def tuş3():
+    a=1
+    while (a <50):
+        a=a +1
+        pyautogui.typewrite("3", interval=0.05)
+
+def tuş4():
+    a=1
+    while (a <50):
+        a=a +1
+        pyautogui.typewrite("4", interval=0.05)
+
+def tuşw():
+    a=1
+    while (a <50):
+        a=a +1
+        pyautogui.typewrite("w", interval=0.05)
+
+def tuşa():
+    a=1
+    while (a <50):
+        a=a +1
+        pyautogui.typewrite("a", interval=0.05)
+
+def tuşs():
+    a=1
+    while (a <50):
+        a=a +1
+        pyautogui.typewrite("s", interval=0.05)
+
+def tuşd():
+    a=1
+    while (a <50):
+        a=a +1
+        pyautogui.typewrite("d", interval=0.05)
+
+def site():
+    os.system("site.html")
+
+def solclick():
+    i=1
+    while(i<10):
+        i=i+1
+        pyautogui.click(button='left', clicks=3, x=400, y=400, interval=0.25)
+
+def sağclick():
+    i=1
+    while(i<10):
+        i=i+1
+        pyautogui.rightClick(x=400,y=400)
+        
+def menu():
+    filewin = Toplevel(pencere)
+    yazı = Label(filewin, text="BandoLero My Program")
+    yazı.grid(row=0, column=0)
+   
+def müzik():
+    renk = Label(pencere, bg="black", width="100", height="30")
+    renk.grid(row=0, column=0)
+    
+    geridön = Button(pencere, bg="black", fg="green", width="10", text="Geri dön", command=home)
+    geridön.place(x=10, y=10)
+
+    buton = Button(pencere, bg="black", fg="green", width="10", text="gerilim", command=sound)
+    buton.place(x=10, y=40)
+    
+def sound():
+    playsound.playsound("icepeak.mp3", True)
+
+def linux():
+
+    renk = Label(pencere, bg="black", width="100", height="30")
+    renk.grid(row=0, column=0)
+    
+    anaekran = Button(pencere, bg="black", fg="green", text="Geri dön", command=home)
+    anaekran.place(x=10, y=10)
+
+    updater= Button(pencere, bg="black", fg="green", text="Update", command=update)
+    updater.place(x=10, y=40)
+
+def update():
+    os.system("ifconfig")
+
+#ANA SAYFA      
+
+user = Label(pencere, bg="black", fg="green", text="User =>", width="10")
+user.place(x=200, y=159)
+
+user2 = Entry(pencere, bg="black", fg="green", width="30")
+user2.place(x=300, y=160.5)
+
+passwd = Label(pencere, bg="black", fg="green", text="Pass =>", width="10")
+passwd.place(x=200, y=179)
+
+passwd2 = Entry(pencere, bg="black", fg="green", width="30", show="*")
+passwd2.place(x=300, y=179)
+
+sonuc = Label(pencere, bg="black", fg="green", text="")
+sonuc.place(x=300, y=250)
+       
+buton = Button(pencere, bg="black", fg="green", text="okey", width="40", command=home)
+buton.place(x=200, y=200)
+
+pencere.mainloop()
